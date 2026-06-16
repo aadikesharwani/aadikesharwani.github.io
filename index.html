@@ -178,15 +178,12 @@ h2{font-family:var(--display);font-size:clamp(28px,4vw,46px);font-weight:800;lin
 
 /* ── PROJECTS ── */
 #projects{background:var(--surface);}
-.project-feature{background:var(--bg);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:32px;display:grid;grid-template-columns:1fr 1fr;transition:border-color .3s;}
+.project-feature{background:var(--bg);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:40px;display:flex;flex-direction:column;transition:border-color .3s;}
 .project-feature:hover{border-color:var(--purple);}
-.project-feature.reverse{direction:rtl;}
-.project-feature.reverse > *{direction:ltr;}
-.proj-img{position:relative;min-height:340px;background:var(--surface2);display:flex;flex-direction:column;}
-.proj-img-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--muted);font-family:var(--mono);font-size:11px;text-align:center;padding:24px;min-height:340px;}
-.proj-img-placeholder .icon{font-size:40px;margin-bottom:6px;}
+.proj-img{position:relative;width:100%;height:320px;background:var(--surface2);overflow:hidden;flex-shrink:0;}
+.proj-img img{width:100%;height:320px;object-fit:cover;object-position:top left;display:block;}
 .proj-tag-overlay{position:absolute;bottom:14px;left:14px;display:flex;flex-wrap:wrap;gap:5px;}
-.proj-content{padding:40px 36px;display:flex;flex-direction:column;justify-content:center;}
+.proj-content{padding:36px 40px;display:flex;flex-direction:column;}
 .proj-num{font-family:var(--mono);font-size:11px;color:var(--purple);letter-spacing:.1em;margin-bottom:10px;}
 .proj-content h3{font-family:var(--display);font-size:24px;font-weight:800;margin-bottom:6px;line-height:1.1;}
 .proj-domain{font-family:var(--mono);font-size:11px;color:var(--accent);margin-bottom:16px;}
@@ -266,6 +263,32 @@ h2{font-family:var(--display);font-size:clamp(28px,4vw,46px);font-weight:800;lin
 .skills-ticker .ticker-item{padding:4px 20px;border-right:none;font-size:11px;color:var(--muted);}
 .skills-ticker .ticker-item span{color:var(--border);}
 
+/* ── BUSINESS IMPACT GRID ── */
+#impact{background:var(--surface);}
+.impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.impact-card{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:28px 24px;transition:border-color .2s,transform .2s;}
+.impact-card:hover{border-color:var(--accent);transform:translateY(-2px);}
+.impact-card-val{font-family:var(--display);font-size:38px;font-weight:800;color:var(--accent);line-height:1;margin-bottom:4px;}
+.impact-card-label{font-family:var(--mono);font-size:11px;color:var(--text);font-weight:500;margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em;}
+.impact-card-desc{font-size:13px;color:var(--muted);line-height:1.65;}
+@media(max-width:860px){.impact-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:540px){.impact-grid{grid-template-columns:1fr;}}
+
+/* ── CONSULTING / ARCHITECTURE GRID ── */
+#consulting{background:var(--bg);}
+.consult-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.consult-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px;transition:border-color .2s;}
+.consult-card:hover{border-color:var(--purple);}
+.consult-tag{display:inline-block;background:rgba(123,92,240,.15);border:1px solid rgba(123,92,240,.3);color:var(--purple);font-family:var(--mono);font-size:10px;padding:3px 10px;border-radius:4px;margin-bottom:12px;letter-spacing:.06em;text-transform:uppercase;}
+.consult-card h3{font-size:15px;font-weight:700;margin-bottom:14px;line-height:1.35;color:var(--text);}
+.consult-card p{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:8px;}
+.consult-card p strong{color:var(--text);}
+.consult-situation{}
+.consult-action{}
+.consult-outcome{color:var(--green) !important;}
+.consult-outcome strong{color:var(--green) !important;}
+@media(max-width:860px){.consult-grid{grid-template-columns:1fr;}}
+
 /* ── CONTACT ── */
 #contact{background:var(--bg);text-align:center;}
 #contact .wrap{max-width:640px;}
@@ -291,8 +314,7 @@ footer span{color:var(--accent);}
   .hero-grid{grid-template-columns:1fr;gap:40px;}
   .hero-right{display:none;}
   .skills-grid{grid-template-columns:1fr 1fr;}
-  .project-feature{grid-template-columns:1fr;}
-  .project-feature.reverse{direction:ltr;}
+  .project-feature{flex-direction:column;}
   .tl-item{grid-template-columns:0 32px 1fr;}
   .tl-date{display:none;}
   .domain-grid{grid-template-columns:1fr;}
@@ -324,8 +346,7 @@ footer span{color:var(--accent);}
 #carouselHero .carousel-slide img{width:100%;height:360px;object-fit:cover;object-position:top left;display:block;}
 
 /* ── PROJ-IMG fixed height, no scroll ── */
-.proj-img{position:relative;height:340px;overflow:hidden;background:var(--surface2);}
-.proj-img img{width:100%;height:340px;object-fit:cover;object-position:top left;display:block;}
+
 
 /* ── CAROUSEL ── */
 .carousel{position:relative;width:100%;height:100%;min-height:340px;overflow:hidden;background:var(--surface2);}
@@ -350,6 +371,7 @@ footer span{color:var(--accent);}
     <ul class="nav-links" role="list">
       <li><a href="#skills">Skills</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#consulting">Consulting</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -369,12 +391,12 @@ footer span{color:var(--accent);}
     <h1>
       <span class="line1">Aadi</span>
       <span class="line2">Kesharwani</span>
-      <span class="line3">Senior Power BI Developer · BI Consultant</span>
+      <span class="line3">Senior Power BI Developer · BI Consultant · Healthcare Analytics</span>
     </h1>
     <p class="hero-desc">
-      I build <strong>enterprise analytics platforms</strong> that people actually open every morning —
-      end-to-end, from data architecture to go-live adoption.
-      Delivered across <strong>healthcare, pharma, manufacturing, and beyond</strong>.
+      <strong>Power BI Consultant</strong> specialising in enterprise analytics for
+      <strong>US pharmaceutical &amp; healthcare organisations</strong> — and any data-driven industry beyond.
+      End-to-end from data architecture to go-live adoption, with measurable business impact.
       Based in Pune. Available worldwide.
     </p>
     <div class="hero-btns">
@@ -607,7 +629,7 @@ footer span{color:var(--accent);}
     <div class="why-card reveal">
       <div class="why-num">01 / FULL-STACK BI</div>
       <h3>One person,<br/>whole pipeline.</h3>
-      <p>From raw source tables in Redshift or Snowflake to a polished dashboard your stakeholders trust — I own every layer. No handoffs, no gaps, no finger-pointing when something breaks.</p>
+      <p>From raw source tables in Redshift or Snowflake to a polished dashboard your stakeholders trust — I own every layer. No handoffs, no gaps. Across <strong style="color:var(--text)">millions of records</strong>, <strong style="color:var(--text)">91 territories</strong>, and <strong style="color:var(--text)">150+ users</strong>.</p>
     </div>
     <div class="why-card reveal">
       <div class="why-num">02 / US CLIENT EXPERIENCE</div>
@@ -619,6 +641,53 @@ footer span{color:var(--accent);}
       <h3>Dashboards that<br/>explain themselves.</h3>
       <p>Integrating LLMs directly into Power BI so reports surface the narrative, not just the number. Your leadership team gets the "why" without digging through filters.</p>
     </div>
+  </div>
+</div>
+</section>
+
+<!-- BUSINESS IMPACT -->
+<section id="impact" aria-label="Business impact">
+<div class="wrap">
+  <p class="sec-label reveal">// outcomes, not outputs</p>
+  <h2 class="reveal">Measurable Business Value</h2>
+  <div class="impact-grid reveal">
+
+    <div class="impact-card">
+      <div class="impact-card-val">80%+</div>
+      <div class="impact-card-label">User adoption</div>
+      <div class="impact-card-desc">Achieved at go-live across a 150+ user national field force — through embedded training, intuitive UX, and same-day issue resolution.</div>
+    </div>
+
+    <div class="impact-card">
+      <div class="impact-card-val">3 months</div>
+      <div class="impact-card-label">8 dashboards delivered</div>
+      <div class="impact-card-desc">Full suite from requirements to production — Summary, Performance, Activity, Customer List, Enrollment, Pre-Call Card, Payer, Map — zero defects at go-live.</div>
+    </div>
+
+    <div class="impact-card">
+      <div class="impact-card-val">50%</div>
+      <div class="impact-card-label">Backend plan accelerated</div>
+      <div class="impact-card-desc">Delivered 50% of a 6-month Redshift data engineering plan in 2 months — SQL tables, stored procedures, and window functions independently.</div>
+    </div>
+
+    <div class="impact-card">
+      <div class="impact-card-val">13</div>
+      <div class="impact-card-label">Reports managed concurrently</div>
+      <div class="impact-card-desc">Managed 13 live dashboards across 2 enterprise US clients simultaneously — with zero SLA breaches and daily stakeholder governance.</div>
+    </div>
+
+    <div class="impact-card">
+      <div class="impact-card-val">91</div>
+      <div class="impact-card-label">Territories secured with RLS</div>
+      <div class="impact-card-desc">Designed and implemented Dynamic RLS across Territory → Region → Area → National — enabling field reps to see only their data, leadership to see all.</div>
+    </div>
+
+    <div class="impact-card">
+      <div class="impact-card-val">~0</div>
+      <div class="impact-card-label">Defects at go-live</div>
+      <div class="impact-card-desc">Consistently delivered production-ready reports with near-zero post-launch defects — achieved through structured UAT, SIT, and daily client governance.</div>
+    </div>
+
   </div>
 </div>
 </section>
@@ -678,7 +747,7 @@ footer span{color:var(--accent);}
   </div>
 
   <!-- PROJECT 2 -->
-  <div class="project-feature reverse reveal">
+  <div class="project-feature reveal">
     <div class="proj-img">
       <img src="arc_perf.png"
            alt="Field Dashboard — Performance page: apheresis curve, prescriber chart and ATC tier breakdown"
@@ -768,6 +837,49 @@ footer span{color:var(--accent);}
         <span class="pill">Requirements Analysis</span><span class="pill">UAT / SIT</span><span class="pill">Agile Delivery</span>
         <span class="pill">US Onshore Experience</span><span class="pill">User Training</span><span class="pill">Adoption Tracking</span>
       </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<!-- ARCHITECTURE & CONSULTING -->
+<section id="consulting" aria-label="Architecture and consulting">
+<div class="wrap">
+  <p class="sec-label reveal">// advisory &amp; architecture</p>
+  <h2 class="reveal">Consulting Decisions I've Delivered</h2>
+  <div class="consult-grid">
+
+    <div class="consult-card reveal">
+      <div class="consult-tag">Architecture</div>
+      <h3>Recommended Redshift Over Snowflake for Client Workload</h3>
+      <p class="consult-situation"><strong>Situation:</strong> Client team proposed Snowflake as the BI data source for a new pharma analytics platform.</p>
+      <p class="consult-action"><strong>Recommendation:</strong> Advised retaining Amazon Redshift — existing ZS data warehouse pipelines already landed data there, switching would introduce 3+ months of migration overhead with no analytics benefit at current data volume.</p>
+      <p class="consult-outcome"><strong>Outcome:</strong> Recommendation accepted. Delivered 8 dashboards in 3 months directly from Redshift without migration delay.</p>
+    </div>
+
+    <div class="consult-card reveal">
+      <div class="consult-tag">Data Model</div>
+      <h3>Proposed Measure-Only Tables to Eliminate Orphan DAX</h3>
+      <p class="consult-situation"><strong>Situation:</strong> DAX measures scattered across 12+ fact tables — causing inconsistent metric definitions and slow model refresh.</p>
+      <p class="consult-action"><strong>Recommendation:</strong> Centralised all measures into dedicated measure tables grouped by functional area (Performance, Activity, Enrollment), removed duplicate calculations.</p>
+      <p class="consult-outcome"><strong>Outcome:</strong> Reduced measure count by ~30%, eliminated conflicting definitions, improved developer onboarding speed significantly.</p>
+    </div>
+
+    <div class="consult-card reveal">
+      <div class="consult-tag">Governance</div>
+      <h3>Introduced Deployment Pipeline Standards Across Client Reports</h3>
+      <p class="consult-situation"><strong>Situation:</strong> Reports were being published directly to production workspaces — no staging, no rollback, no version control.</p>
+      <p class="consult-action"><strong>Recommendation:</strong> Implemented Power BI Deployment Pipelines (Dev → Test → Production) with change log documentation and release gates for UAT sign-off before promotion.</p>
+      <p class="consult-outcome"><strong>Outcome:</strong> Zero unplanned production incidents post-implementation. Client adopted this as the standard for all subsequent report releases.</p>
+    </div>
+
+    <div class="consult-card reveal">
+      <div class="consult-tag">Performance</div>
+      <h3>Diagnosed and Fixed 45-Second Dashboard Load Time</h3>
+      <p class="consult-situation"><strong>Situation:</strong> Summary page taking 45+ seconds to load for national-level filters on millions of enrollment records.</p>
+      <p class="consult-action"><strong>Recommendation:</strong> Identified Cartesian joins in Power Query and non-indexed filter columns. Rewrote M transformations, added calculated columns at source, and removed bi-directional relationships causing fan-out.</p>
+      <p class="consult-outcome"><strong>Outcome:</strong> Load time reduced from 45 seconds to under 8 seconds — confirmed by client stakeholders during UAT.</p>
     </div>
 
   </div>
@@ -925,8 +1037,8 @@ footer span{color:var(--accent);}
   </p>
   <div class="contact-links reveal">
     <a href="mailto:aadi.kesharwani.work@gmail.com" class="contact-link" aria-label="Send email to Aadi">✉ Email</a>
-    <a href="https://linkedin.com/in/aadi-kesharwani-308201216" class="contact-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">💼 LinkedIn</a>
-    <a href="https://github.com/aadikesharwani" class="contact-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">🐙 GitHub</a>
+    <a href="https://linkedin.com/in/aadi-kesharwani" class="contact-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">💼 LinkedIn</a>
+    <a href="https://github.com/aadi-kesharwani" class="contact-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">🐙 GitHub</a>
     <a href="Aadi_Kesharwani_Resume.pdf" class="contact-link" download aria-label="Download resume PDF">⬇ Resume</a>
   </div>
 </div>
