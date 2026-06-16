@@ -288,6 +288,19 @@ footer span{color:var(--accent);}
   .hero-badge::before{animation:none;}
   .ticker-track{animation:none;}
 }
+
+/* ── CAROUSEL ── */
+.carousel{position:relative;width:100%;height:100%;min-height:340px;overflow:hidden;background:var(--surface2);}
+.carousel-track{display:flex;height:100%;min-height:340px;transition:transform .45s cubic-bezier(.4,0,.2,1);}
+.carousel-slide{min-width:100%;height:100%;min-height:340px;flex-shrink:0;overflow:hidden;}
+.carousel-slide img{width:100%;height:100%;min-height:340px;object-fit:cover;object-position:top center;display:block;}
+.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(13,15,26,.72);border:1px solid var(--border);color:var(--text);font-size:22px;width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;transition:background .2s,border-color .2s;line-height:1;padding:0;}
+.carousel-btn:hover{background:var(--accent);border-color:var(--accent);color:#0D0F1A;}
+.carousel-prev{left:10px;}
+.carousel-next{right:10px;}
+.carousel-dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:10;}
+.carousel-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.35);cursor:pointer;transition:background .2s,transform .2s;}
+.carousel-dot.active{background:var(--accent);transform:scale(1.2);}
 </style>
 </head>
 <body>
@@ -605,13 +618,17 @@ footer span{color:var(--accent);}
 
   <!-- PROJECT 1 -->
   <div class="project-feature reveal">
-    <div class="proj-img">
-      <img src="Summary.png" alt="Field Sales Dashboard — Summary page showing KPI cards, enrollment metrics and activity section"      style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;min-height:340px;"/>
-        <div class="icon" aria-hidden="true">📊</div>
-        <div style="font-weight:600;color:var(--text);">Field Sales Dashboard</div>
-        <div>US Pharma / CAR-T Therapy</div>
-        <div style="font-size:9px;color:var(--border);margin-top:8px;">
-          Add screenshot: &lt;img src="field-dashboard.png" alt="Field Sales Dashboard"/&gt;
+    <div class="proj-img" style="min-height:340px;overflow:hidden;position:relative;">
+      <div class="carousel" id="carousel1">
+        <div class="carousel-track">
+          <div class="carousel-slide"><img src="Summary.png" alt="KAM Dashboard — Summary page: KPIs, enrollment metrics, activity section and Alerts" loading="lazy"/></div>
+          <div class="carousel-slide"><img src="performance.png" alt="KAM Dashboard — Performance page: enrollment trend chart and prescriber breakdown" loading="lazy"/></div>
+        </div>
+        <button class="carousel-btn carousel-prev" onclick="carouselMove('carousel1',-1)" aria-label="Previous screenshot">&#8249;</button>
+        <button class="carousel-btn carousel-next" onclick="carouselMove('carousel1',1)" aria-label="Next screenshot">&#8250;</button>
+        <div class="carousel-dots" id="carousel1-dots">
+          <span class="carousel-dot active" onclick="carouselGo('carousel1',0)"></span>
+          <span class="carousel-dot" onclick="carouselGo('carousel1',1)"></span>
         </div>
       </div>
       <div class="proj-tag-overlay">
@@ -658,13 +675,17 @@ footer span{color:var(--accent);}
 
   <!-- PROJECT 2 -->
   <div class="project-feature reverse reveal">
-    <div class="proj-img">
-      <img src="performance.png" alt="KAM Field Sales Dashboard — Performance page showing enrollment trend chart and prescriber metrics" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;min-height:340px;"/>
-        <div class="icon" aria-hidden="true">🏥</div>
-        <div style="font-weight:600;color:var(--text);">KAM Field Sales Reporting</div>
-        <div>US Healthcare / Ophthalmology</div>
-        <div style="font-size:9px;color:var(--border);margin-top:8px;">
-          Add screenshot: &lt;img src="kam-dashboard.png" alt="KAM Dashboard"/&gt;
+    <div class="proj-img" style="min-height:340px;overflow:hidden;position:relative;">
+      <div class="carousel" id="carousel2">
+        <div class="carousel-track">
+          <div class="carousel-slide"><img src="arc_perf.png" alt="KAM Dashboard — third page screenshot" loading="lazy"/></div>
+          <div class="carousel-slide"><img src="arc_pcc.png" alt="KAM Dashboard — fourth page screenshot" loading="lazy"/></div>
+        </div>
+        <button class="carousel-btn carousel-prev" onclick="carouselMove('carousel2',-1)" aria-label="Previous screenshot">&#8249;</button>
+        <button class="carousel-btn carousel-next" onclick="carouselMove('carousel2',1)" aria-label="Next screenshot">&#8250;</button>
+        <div class="carousel-dots" id="carousel2-dots">
+          <span class="carousel-dot active" onclick="carouselGo('carousel2',0)"></span>
+          <span class="carousel-dot" onclick="carouselGo('carousel2',1)"></span>
         </div>
       </div>
       <div class="proj-tag-overlay">
@@ -975,6 +996,44 @@ setTimeout(() => {
   animateCount(document.getElementById('kpi2'), 32240);
   animateCount(document.getElementById('kpi3'), 72561);
 }, 700);
+
+// ── CAROUSEL ──
+const carouselState = {};
+
+function carouselInit(id) {
+  const slides = document.querySelectorAll(`#${id} .carousel-slide`);
+  carouselState[id] = { index: 0, total: slides.length };
+}
+
+function carouselGo(id, index) {
+  const state = carouselState[id];
+  if (!state) return;
+  state.index = Math.max(0, Math.min(index, state.total - 1));
+  const track = document.querySelector(`#${id} .carousel-track`);
+  if (track) track.style.transform = `translateX(-${state.index * 100}%)`;
+  document.querySelectorAll(`#${id}-dots .carousel-dot`).forEach((d, i) => {
+    d.classList.toggle('active', i === state.index);
+  });
+}
+
+function carouselMove(id, dir) {
+  const state = carouselState[id];
+  if (!state) return;
+  const next = (state.index + dir + state.total) % state.total;
+  carouselGo(id, next);
+}
+
+// auto-advance every 4 seconds
+function carouselAutoPlay(id, interval) {
+  setInterval(() => carouselMove(id, 1), interval);
+}
+
+['carousel1', 'carousel2'].forEach(id => {
+  if (document.getElementById(id)) {
+    carouselInit(id);
+    carouselAutoPlay(id, 4000);
+  }
+});
 </script>
 </body>
 </html>
